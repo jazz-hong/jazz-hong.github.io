@@ -11433,3 +11433,158 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+
+.bg-black {
+  background-color: black !important; /* Set background color to black */
+}
+
+.navbar-nav .nav-link {
+  color: #d0ff00 !important; /* Neon green color */
+}
+
+.navbar-nav .nav-link:hover {
+  color: rgb(8, 220, 110) !important; /* Change to a brighter neon green on hover */
+}
+
+.profile-circle {
+  width: 150px; /* Set your desired width */
+  height: 150px; /* Set your desired height */
+  display: inline-block; /* Allows it to take the size of the image */
+  border: 4px solid #FFFF33; /* Neon yellow border */
+  border-radius: 50%; /* Make it circular */
+  overflow: hidden; /* Ensures the image does not overflow the circle */
+  margin: 0; /* Remove any margin */
+  padding: 0; /* Remove any padding */
+}
+
+.img-profile {
+  width: 100%; /* Fill the parent circle */
+  height: 100%; /* Fill the parent circle */
+  object-fit: cover; /* Maintain aspect ratio and cover the area */
+  border-radius: 50%; /* Ensure the image itself is circular */
+  margin: 0; /* Remove any margin */
+  padding: 0; /* Remove any padding */
+  display: block; /* Remove any inline spacing */
+}
+
+.social-icons .social-icon {
+  color: black; /* Change icon color to black */
+  background-color: transparent;
+}
+
+.social-icons .social-icon:hover {
+  color: #FFFF33; /* Optional: change color on hover */
+  background-color: black;
+}
+
+.email-link {
+  color: purple; /* Purple color for the link */
+  text-decoration: none; /* Remove underline */
+}
+
+.email-link:hover {
+  color: black; /* Change color to black on hover */
+}
+
+/* Skills Grid Layout */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* Skill Item Styling */
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+
+/* Button Style */
+.skill-button {
+  margin-top: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 15px;
+  cursor: default;
+  pointer-events: none;
+}
+
+.text-primary {
+  margin-top: 6px;
+  background-color: rgb(8, 220, 110);
+  color: black !important;
+  border: 3px solid #008000; /* Darker green */
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 10px;
+  cursor: default;
+  pointer-events: none;
+}
+
+.gradient-text {
+  background: linear-gradient(270deg, green, blue, purple, black, orange); /* Gradient colors */
+  background-size: 400%; /* Increase background size for smoother animation */
+  -webkit-background-clip: text; /* Makes the gradient fill the text */
+  -webkit-text-fill-color: transparent; /* Makes the text transparent to show the gradient */
+  animation: gradient-animation 10s ease infinite; /* Animation for the gradient */
+}
+
+@keyframes gradient-animation {
+  0% {
+      background-position: 0% 50%; /* Start position */
+  }
+  100% {
+      background-position: 100% 50%; /* End position */
+  }
+}
+
+/* Background Styling */
+body {
+  background-color: #d0ff00; /* Bright neon background */
+}
+
+h1, .heading {
+  color: black; /* Black font for headings and subtitles */
+}
+
+h2, h3, .subheading {
+  color: black; /* Black font for headings and subtitles */
+  font-family: 'Anonymous Pro', monospace; /* Use Anonymous Pro font */
+}
+
+p, ul li, i {
+  color: black; /* Black font for paragraphs, list items, and italic text */
+  font-family: 'Anonymous Pro', monospace; /* Use Anonymous Pro font */
+}
+
+.resume-section-content h3 {
+  margin-bottom: 10px; /* Make sure margins are similar across sections */
+}
+
+/* For Accomplishments section */
+.accomplishments {
+  margin-top: 20px; /* Adjust to reduce the space at the top */
+  margin-bottom: 20px; /* Adjust to reduce the space at the bottom */
+  padding-top: 0; /* Ensure no extra padding at the top */
+  padding-bottom: 0; /* Ensure no extra padding at the bottom */
+}
+
+/* For Accomplishments List */
+.accomplishments-list {
+  padding-left: 0; /* Remove any padding that pushes list to the right */
+  margin-top: 10px; /* Control space between the header and list */
+  margin-bottom: 0; /* Reduce space below the list */
+}
+
+/* For individual list items */
+.accomplishments-list li {
+  margin-bottom: 10px; /* Control the spacing between list items */
+  list-style-type: none; /* Remove bullets if needed, as you're using emojis */
+}
