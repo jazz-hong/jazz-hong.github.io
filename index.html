@@ -55,7 +55,7 @@
                     </div>
                     <p class="lead mb-5" style="text-align: justify;">
                         Hello and welcome! I'm Jazz, born and raised in the vibrant city of Kuching. With an MEng (Hons) in Electrical & Electronic Engineering from the University of Nottingham, I'm now based in Malaysia, exploring an exciting career in Artificial Intelligence and Software Development with SAINS.<br><br>
-                        But there's more to me than just work—I’m passionate about staying active! I recharge by swimming, trekking scenic hiking trails, and working out at the gym. Music also plays a big role in my life, allowing me to express creativity through piano and guitar. Plus, I love exploring new horizons through my YouTube music channel, where I share original compositions and creative music projects. Thanks for visiting my site, and I hope your day is filled with inspiration and discovery!
+                        But there's more to me than just work—I'm passionate about staying active! I recharge by swimming, trekking scenic hiking trails, and working out at the gym. Music also plays a big role in my life, allowing me to express creativity through piano and guitar. Plus, I love exploring new horizons through my YouTube music channel, where I share original compositions and creative music projects. Thanks for visiting my site, and I hope your day is filled with inspiration and discovery!
                     </p>
                     <div class="social-icons">
                         <a class="social-icon" href="https://www.facebook.com/jazz.hong.7/" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -460,19 +460,31 @@
                 }
 
                 .gradient-text {
-                    background: linear-gradient(270deg, rgb(15, 230, 15), rgb(0, 229, 255), rgb(187, 8, 187), black, rgb(255, 213, 0)); /* Gradient colors */
-                    background-size: 400%; /* Increase background size for smoother animation */
-                    -webkit-background-clip: text; /* Makes the gradient fill the text */
-                    -webkit-text-fill-color: transparent; /* Makes the text transparent to show the gradient */
-                    animation: gradient-animation 10s ease infinite; /* Animation for the gradient */
+                    background: linear-gradient(270deg, 
+                        #ff0000, /* Red */
+                        #ff8000, /* Orange */
+                        #ffff00, /* Yellow */
+                        #00ff00, /* Green */
+                        #00ffff, /* Cyan */
+                        #0000ff, /* Blue */
+                        #8000ff, /* Purple */
+                        #ff0080  /* Pink */
+                    ); 
+                    background-size: 800% 800%; /* Increased size for smoother transition */
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    animation: rainbow-animation 8s linear infinite; /* Shortened duration, linear timing */
                 }
 
-                @keyframes gradient-animation {
+                @keyframes rainbow-animation {
                     0% {
-                        background-position: 0% 50%; /* Start position */
+                        background-position: 0% 50%;
+                    }
+                    50% {
+                        background-position: 100% 50%;
                     }
                     100% {
-                        background-position: 100% 50%; /* End position */
+                        background-position: 0% 50%;
                     }
                 }
 
