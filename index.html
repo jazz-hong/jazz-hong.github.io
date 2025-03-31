@@ -54,8 +54,13 @@
                         <a href="mailto:ceo@infinitysms.online" class="email-link">ceo@infinitysms.online</a>
                     </div>
                     <p class="lead mb-5" style="text-align: justify;">
-                        Hello and welcome! I'm Jazz, born and raised in the vibrant city of Kuching. With an MEng (Hons) in Electrical & Electronic Engineering from the University of Nottingham, I'm now based in Malaysia, exploring an exciting career in Artificial Intelligence and Software Development with SAINS.<br><br>
-                        But there's more to me than just work—I'm passionate about staying active! I recharge by swimming, trekking scenic hiking trails, and working out at the gym. Music also plays a big role in my life, allowing me to express creativity through piano and guitar. Plus, I love exploring new horizons through my YouTube music channel, where I share original compositions and creative music projects. Thanks for visiting my site, and I hope your day is filled with inspiration and discovery!
+                        <strong>
+                            <span class="typing-text-1"></span>
+                        </strong>
+                        <br><br>
+                        <strong>
+                            <span class="typing-text-2"></span>
+                        </strong>
                     </p>
                     <div class="social-icons">
                         <a class="social-icon" href="https://www.facebook.com/jazz.hong.7/" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -562,6 +567,26 @@
                     font-size: 1.3rem; /* Slightly larger than paragraphs */
                 }
 
+                /* Add to your existing style section */
+                .typing-container {
+                    font-weight: bold;
+                }
+
+                .typing-text-1, .typing-text-2 {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .word {
+                    margin-right: 0.5em;
+                    opacity: 0;
+                    transition: opacity 0.1s;
+                }
+
+                .word.visible {
+                    opacity: 1;
+                }
+
             </style>
 
             <!-- Accomplishments Section -->
@@ -703,3 +728,35 @@
        height: 40rem !important;
      }
    </style>
+
+<script>
+const text1 = "Hello and welcome! I'm Jazz, born and raised in the vibrant city of Kuching. With an MEng (Hons) in Electrical & Electronic Engineering from the University of Nottingham, I'm now based in Malaysia, exploring an exciting career in Artificial Intelligence and Software Development with SAINS.";
+const text2 = "But there's more to me than just work—I'm passionate about staying active! I recharge by swimming, trekking scenic hiking trails, and working out at the gym. Music also plays a big role in my life, allowing me to express creativity through piano and guitar. Plus, I love exploring new horizons through my YouTube music channel, where I share original compositions and creative music projects. Thanks for visiting my site, and I hope your day is filled with inspiration and discovery!";
+
+function typeWriter(text, element, delay = 100) {
+    const words = text.split(' ');
+    element.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+    const wordElements = element.querySelectorAll('.word');
+    
+    let currentIndex = 0;
+    
+    function showNextWord() {
+        if (currentIndex < words.length) {
+            wordElements[currentIndex].style.opacity = '1';
+            currentIndex++;
+            setTimeout(showNextWord, delay);
+        }
+    }
+
+    showNextWord();
+    return new Promise(resolve => setTimeout(resolve, delay * words.length));
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
+    const element1 = document.querySelector('.typing-text-1');
+    const element2 = document.querySelector('.typing-text-2');
+    
+    await typeWriter(text1, element1);
+    await typeWriter(text2, element2);
+});
+</script>
