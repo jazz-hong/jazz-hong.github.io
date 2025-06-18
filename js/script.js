@@ -197,7 +197,19 @@ class TypingEffect {
 function animateStats() {
     const stats = document.querySelectorAll('.stat-number');
     stats.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
+        if (stat.dataset.noAnimate) {
+            stat.textContent = stat.dataset.target;
+            return;
+        }
+
+        const targetString = stat.getAttribute('data-target');
+        const target = parseInt(targetString);
+
+        if (isNaN(target)) {
+            stat.textContent = targetString;
+            return;
+        }
+
         stat.textContent = '0';
         let current = 0;
         const increment = target / 50; // Animate over 50 steps
@@ -208,7 +220,7 @@ function animateStats() {
                 stat.textContent = Math.ceil(current);
                 setTimeout(updateCount, 20);
             } else {
-                stat.textContent = target;
+                stat.textContent = targetString;
             }
         };
         updateCount();
