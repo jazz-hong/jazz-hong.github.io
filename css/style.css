@@ -109,7 +109,7 @@ nav {
 /* Modern Hero Section */
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 85vh; /* reduced height to cut blank bottom space */
     background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
     overflow: hidden;
     display: flex;
@@ -439,7 +439,7 @@ nav {
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
-    bottom: 2rem;
+    bottom: 4rem; /* position relative to new height */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
