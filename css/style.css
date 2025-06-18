@@ -3,7 +3,7 @@
     --primary-color: #00ff00;
     --secondary-color: #ff00ff;
     --background-color: #0a0a0a;
-    --surface-color: #1a1a1a;
+    --surface-color: #000000;
     --text-color: #ffffff;
     --text-color-muted: #888888;
     --glitch-color: #0ff;
@@ -75,7 +75,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5% 1rem;
-    max-width: 1520px;
+    max-width: 1700px;
     margin: 0 auto;
 }
 
@@ -91,7 +91,7 @@ nav {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .nav-links a {
