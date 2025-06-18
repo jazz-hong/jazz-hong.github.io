@@ -939,6 +939,8 @@ section {
     color: var(--text-color);
     text-decoration: none;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .contact-method:hover {
