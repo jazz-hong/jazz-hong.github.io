@@ -1747,19 +1747,13 @@ footer {
 }
 
 .section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(45deg, transparent 45%, var(--primary-color) 45%, var(--primary-color) 55%, transparent 55%),
-        linear-gradient(-45deg, transparent 45%, var(--primary-color) 45%, var(--primary-color) 55%, transparent 55%);
-    background-size: 30px 30px;
-    opacity: 0.1;
-    animation: gridMove 20s linear infinite;
+    /* The global body::before now supplies the grid. Keep this
+       pseudo-element for positioning context but make its background
+       transparent so it no longer introduces a misaligned overlay. */
+    background: none;
     pointer-events: none;
+    top: 0;
+    height: 100%;
 }
 
 @keyframes gridMove {
@@ -1985,4 +1979,30 @@ footer {
 @keyframes bracketGlow {
     0%, 100% { text-shadow: 0 0 5px var(--primary-color); }
     50% { text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color), 0 0 40px var(--primary-color); }
+}
+
+/* ------------------------------------------------------------------
+   GLOBAL DIAMOND GRID OVERLAY
+   ------------------------------------------------------------------
+   Having the grid attached to the body (position: fixed) ensures it
+   spans the entire document and scrolls smoothly beneath every
+   section, eliminating the "divider" effect that occurred where each
+   section started its own overlay.
+------------------------------------------------------------------ */
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(45deg, transparent 45%, var(--primary-color) 45%, var(--primary-color) 55%, transparent 55%),
+        linear-gradient(-45deg, transparent 45%, var(--primary-color) 45%, var(--primary-color) 55%, transparent 55%);
+    background-size: 30px 30px;
+    opacity: 0.1;
+    animation: gridMove 20s linear infinite;
+    pointer-events: none;
+    z-index: 0; /* stays behind everything */
 }
