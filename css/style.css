@@ -952,8 +952,11 @@ section {
 footer {
     text-align: center;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.8);
+    /* Fully opaque black so the diamond grid isn't visible behind it */
+    background: #000;
     border-top: 1px solid var(--primary-color);
+    position: relative;
+    z-index: 1; /* sits atop the global body::before grid */
 }
 
 .social-links {
