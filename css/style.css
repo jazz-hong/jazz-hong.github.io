@@ -13,20 +13,6 @@
     --hover-color: #00cc00;
 }
 
-/* Light Theme */
-[data-theme="light"] {
-    --primary-color: #1a8f1a;
-    --secondary-color: #b300b3;
-    --background-color: #f0f0f0;
-    --surface-color: #ffffff;
-    --text-color: #1a1a1a;
-    --text-color-muted: #666666;
-    --glitch-color: #0088ff;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --border-color: var(--primary-color);
-    --hover-color: #147814;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -75,7 +61,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5% 1rem;
-    max-width: 1700px;
+    max-width: 1520px;
     margin: 0 auto;
 }
 
