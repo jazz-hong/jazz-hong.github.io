@@ -74,8 +74,8 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
-    max-width: 1400px;
+    padding: 1.5rem 5% 1rem;
+    max-width: 1520px;
     margin: 0 auto;
 }
 
@@ -91,13 +91,15 @@ nav {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
 }
 
 .nav-links a:hover {
