@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
         new TypingEffect(typedTextElement, words);
     }
 
+    // Typing effect for the logo
+    const hackTextElement = document.querySelector('.hack-text');
+    if (hackTextElement) {
+        new TypingEffect(hackTextElement, ['Hack The Planet'], 6000);
+    }
+
     // Initialize Matrix Rain
     const matrixCanvas = document.getElementById('matrix-canvas');
     if (matrixCanvas) {
