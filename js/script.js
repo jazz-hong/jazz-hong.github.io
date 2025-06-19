@@ -13,8 +13,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Typing effect for the logo
     const hackTextElement = document.querySelector('.hack-text');
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
     if (hackTextElement) {
-        new TypingEffect(hackTextElement, ['Welcome My Friend, Read The Notice', 'Enter The Terminal', 'Hack The Planet', 'The Future Is Here', 'Escape The Matrix'], 3000);
+        if (isMobile) {
+            // Typing effect for mobile notice, stays after typing
+            new TypingEffect(hackTextElement, ['Please use a PC to view'], 1000000); // Large wait time to prevent deletion
+        } else {
+            // Normal typing effect for desktop
+            new TypingEffect(hackTextElement, [
+                'Welcome My Friend',
+                'Enter The Terminal',
+                'Hack The Planet',
+                'The Future Is Here',
+                'Escape The Matrix'
+            ], 3000);
+        }
     }
 
     // Initialize Matrix Rain
