@@ -185,7 +185,7 @@ nav {
     display: block;
     font-family: var(--font-mono);
     color: var(--primary-color);
-    margin: 0.5rem 0;
+    margin: 0.15rem 0;
 }
 
 .blink {
