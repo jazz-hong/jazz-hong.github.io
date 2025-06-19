@@ -1,4 +1,14 @@
-<h1>jazzhong.github.io</h1>
-<p>My personal profile (About Me)</p>
-<p>Please visit [jazzhong.git.io] (https://jazz-hong.github.io/)</p>
-<p>Resume template by Start Bootstrap (https://startbootstrap.com/theme/resume)</p>
+# Get to know Me
+
+Welcome to my personal profile website!  
+
+🌐 **Live Site:** [JAZZ-HONG](https://jazz-hong.github.io/)
+
+---
+
+> **Idea Credit:**  
+The idea of portfolio is from [@AzriHafiz](https://github.com/AzriHafiz)
+
+---
+
+Thank you for visiting!
