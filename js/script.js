@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Normal typing effect for desktop
             new TypingEffect(hackTextElement, [
-                'Welcome My Friend, Please Read The Notice',
+                'Welcome My Friend',
                 'Enter The Terminal',
                 'Hack The Planet',
                 'The Future Is Here',
