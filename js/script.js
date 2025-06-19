@@ -114,6 +114,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // Hamburger menu toggle for mobile
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('open');
+        });
+    }
 });
 
 class MatrixRain {
