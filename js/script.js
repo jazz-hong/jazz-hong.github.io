@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Typing effect for the logo
     const hackTextElement = document.querySelector('.hack-text');
     if (hackTextElement) {
-        new TypingEffect(hackTextElement, ['Welcome My Friend, Read The Notice', 'Enter The Terminal', 'Hack The Planet', 'The Future Is Here', 'Escape The Matrix'], 3000);
+        new TypingEffect(hackTextElement, ['Welcome My Friend, Please Read The Notice', 'Enter The Terminal', 'Hack The Planet', 'The Future Is Here', 'Escape The Matrix'], 3000);
     }
 
     // Initialize Matrix Rain
