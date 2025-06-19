@@ -16,13 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     if (hackTextElement) {
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
         if (isMobile) {
             // Typing effect for mobile notice, stays after typing
             new TypingEffect(hackTextElement, ['Please use a PC to view'], 1000000); // Large wait time to prevent deletion
         } else {
             // Normal typing effect for desktop
             new TypingEffect(hackTextElement, [
-                'Welcome My Friend',
+                'Welcome My Friend, Please Read The Notice',
                 'Enter The Terminal',
                 'Hack The Planet',
                 'The Future Is Here',
