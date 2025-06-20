@@ -179,6 +179,7 @@ nav {
     padding: 1rem;
     margin-top: 1rem;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    border-radius: 4px;
 }
 
 .glitch-text .line {
@@ -266,6 +267,7 @@ nav {
     font-weight: bold;
     overflow: hidden;
     transition: all 0.3s ease;
+    border-radius: 4px;
 }
 
 .cta-button:hover {
@@ -308,7 +310,7 @@ nav {
 .terminal-container {
     background: rgba(0, 0, 0, 0.9);
     border: 1px solid var(--primary-color);
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
     margin-bottom: 2rem;
     box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
@@ -814,19 +816,21 @@ section {
 
 .skill-card:hover {
     transform: translateY(-5px);
+    border-radius: 4px;
 }
 
 .skill-card i {
     font-size: 2.5rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
+    border-radius: 4px;
 }
 
 .skill-level {
     height: 4px;
     background: rgba(255, 255, 255, 0.1);
     margin-top: 1rem;
-    border-radius: 2px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -1369,10 +1373,11 @@ footer {
     padding: 2rem;
     text-align: center;
     transition: transform 0.3s ease;
+    border-radius: 4px;
 }
 
 .skill-item:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
 }
 
 .skill-icon {
@@ -1453,7 +1458,7 @@ footer {
     background-color: #39FF14; /* Neon Green */
     color: #0a0a0a;
     padding: 2px 8px;
-    border-radius: 5px;
+    border-radius: 4px;
     border: 1px solid #147814;
     font-weight: bold;
 }
@@ -1545,20 +1550,26 @@ footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    margin-top: 2rem;
 }
 
 .tech-item {
-    background: rgba(0, 255, 0, 0.05);
+    background: rgba(0, 20, 0, 0.5);
     border: 1px solid var(--primary-color);
-    padding: 2rem;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
 }
 
 .tech-icon {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--primary-color);
 }
 
@@ -1636,9 +1647,9 @@ footer {
 .project-tags span {
     background: rgba(0, 255, 0, 0.1);
     color: var(--primary-color);
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
     border-radius: 4px;
-    font-size: 0.9rem;
 }
 
 .project-stats {
