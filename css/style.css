@@ -855,6 +855,7 @@ section {
     position: relative;
     overflow: hidden;
     word-wrap: break-word;
+    border-radius: 4px;
 }
 
 .project-card:hover {
@@ -892,6 +893,7 @@ section {
     padding: 2rem;
     margin-bottom: 2rem;
     text-align: center;
+    border-radius: 4px;
 }
 
 .card-header {
@@ -934,6 +936,7 @@ section {
     transition: transform 0.3s ease, background-color 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
+    border-radius: 4px;
 }
 
 .contact-method:hover {
@@ -1616,6 +1619,7 @@ footer {
     position: relative;
     overflow: hidden;
     word-wrap: break-word;
+    border-radius: 4px;
 }
 
 .project-header {
@@ -1924,6 +1928,7 @@ footer {
     );
     z-index: -1;
     animation: borderGlow 1s linear infinite;
+    border-radius: 4px;
 }
 
 @keyframes borderGlow {
