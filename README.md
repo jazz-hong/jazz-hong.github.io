@@ -7,7 +7,7 @@ Welcome to my personal profile website!
 ---
 
 > **Idea Credit:**  
-The idea of portfolio is from [@AzriHafiz](https://github.com/AzriHafiz)
+The idea of to coming out a Github portfolio is from [@AzriHafiz](https://github.com/AzriHafiz)
 
 ---
 
