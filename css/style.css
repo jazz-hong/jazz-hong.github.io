@@ -1313,6 +1313,11 @@ footer {
     
     .glitch-window {
         font-size: 0.8rem;
+        text-align: left;
+    }
+    
+    .glitch-text .line {
+        text-align: left;
     }
     
     .hero-subtitle {
