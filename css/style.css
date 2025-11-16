@@ -35,13 +35,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.15) 0px,
-        rgba(0, 0, 0, 0.15) 1px,
-        transparent 1px,
-        transparent 2px
-    );
+    background: transparent;
     pointer-events: none;
     z-index: 1;
 }
@@ -109,13 +103,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 255, 0, 0.05) 0px,
-        rgba(0, 255, 0, 0.05) 1px,
-        transparent 1px,
-        transparent 2px
-    );
+    background: transparent;
     pointer-events: none;
 }
 
