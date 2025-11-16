@@ -1719,20 +1719,20 @@ footer {
 
 /* Desktop/Mobile specific messages */
 .mobile-only {
-    display: none;
+    display: none !important;
 }
 
 .desktop-only {
-    display: block;
+    display: block !important;
 }
 
 @media (max-width: 768px) {
     .mobile-only {
-        display: block;
+        display: block !important;
     }
     
     .desktop-only {
-        display: none;
+        display: none !important;
     }
 }
 
