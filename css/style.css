@@ -1222,6 +1222,28 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Global Mobile Container Fixes */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    main {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    .content-wrapper {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+    }
+    
     /* Navigation fixes */
     nav {
         flex-direction: row;
@@ -1365,24 +1387,50 @@ footer {
         margin-bottom: 2rem;
     }
     
+    /* Section Grid Mobile - Fix overflow */
+    .section-grid {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        padding: 0;
+        margin: 0;
+    }
+    
     /* About Section Mobile */
     .about-content {
         padding-left: 0;
         padding-right: 0;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .about-text {
+        width: 100%;
+        padding: 0 0.5rem;
     }
     
     .about-text p {
         font-size: 1rem;
+        width: 100%;
+        word-wrap: break-word;
     }
     
     .skill-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         margin-top: 2rem;
+        width: 100%;
+        padding: 0 0.5rem;
     }
     
     .skill-item {
         padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
     .skill-icon {
@@ -1397,28 +1445,59 @@ footer {
         font-size: 0.95rem;
     }
     
+    /* About Visual Section Mobile */
+    .about-visual {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem 0.5rem !important;
+        overflow-x: hidden;
+    }
+    
     /* Code Window Mobile */
     .code-window {
         height: auto;
         max-height: 400px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
     
     .code-content {
         font-size: 0.7rem;
+        padding: 0.5rem;
+        overflow-x: auto;
+        width: 100%;
     }
     
     .code-content pre {
         font-size: 0.7rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
     /* Skills Section Mobile */
+    .skills-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 0.5rem;
+        overflow-x: hidden;
+    }
+    
     .tech-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+        width: 100%;
+        padding: 0;
     }
     
     .tech-item {
         padding: 0.8rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        word-wrap: break-word;
     }
     
     .tech-icon {
@@ -1427,30 +1506,50 @@ footer {
     
     .tech-info h4 {
         font-size: 1rem;
+        word-wrap: break-word;
     }
     
     /* Projects Section Mobile */
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
-        padding: 1rem 0;
+        padding: 1rem 0.5rem;
+        width: 100%;
+        max-width: 100%;
     }
     
     .project-card {
         padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .project-content {
+        width: 100%;
+        padding: 0;
     }
     
     .project-header h3 {
         font-size: 1.2rem;
+        word-wrap: break-word;
     }
     
     .project-tags {
         flex-wrap: wrap;
         gap: 0.5rem;
+        width: 100%;
     }
     
     .project-tags span {
         font-size: 0.75rem;
+    }
+    
+    .project-card p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
     /* Contact Section Mobile */
@@ -1504,6 +1603,19 @@ footer {
 
 /* Additional Mobile Refinements for smaller screens */
 @media (max-width: 480px) {
+    /* Global overflow prevention */
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+    
+    .section {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+    }
+    
     .mega-glitch {
         font-size: 1.5rem;
     }
@@ -1518,8 +1630,37 @@ footer {
         letter-spacing: 2px;
     }
     
+    .skill-grid {
+        padding: 0 0.25rem;
+    }
+    
+    .skill-item {
+        padding: 1rem;
+    }
+    
+    .skill-item h3 {
+        font-size: 1rem;
+    }
+    
+    .skill-item p {
+        font-size: 0.85rem;
+    }
+    
     .tech-grid {
         gap: 0.75rem;
+        padding: 0;
+    }
+    
+    .tech-item {
+        padding: 0.6rem;
+    }
+    
+    .projects-grid {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .project-card {
+        padding: 1rem;
     }
     
     .project-tags {
@@ -1535,6 +1676,15 @@ footer {
         font-size: 0.85rem;
         padding: 0.7rem 1rem;
         letter-spacing: 1px;
+    }
+    
+    .code-content {
+        font-size: 0.65rem;
+        padding: 0.4rem;
+    }
+    
+    .code-content pre {
+        font-size: 0.65rem;
     }
 }
 
