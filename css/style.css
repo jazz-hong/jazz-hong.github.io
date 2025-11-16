@@ -1468,26 +1468,25 @@ footer {
     
     /* Code Window Mobile */
     .code-window {
-        height: auto;
-        max-height: 400px;
+        height: 50vh;
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
-        overflow-x: hidden;
+        overflow-x: auto;
     }
     
     .code-content {
-        font-size: 0.7rem;
-        padding: 0.5rem;
+        font-size: 0.85rem;
+        padding: 1rem;
         overflow-x: auto;
+        overflow-y: auto;
         width: 100%;
     }
     
     .code-content pre {
-        font-size: 0.7rem;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        font-size: 0.85rem;
+        white-space: pre;
+        margin: 0;
     }
     
     /* Skills Section Mobile */
@@ -1710,13 +1709,18 @@ footer {
         letter-spacing: 1px;
     }
     
+    .code-window {
+        height: 45vh;
+    }
+    
     .code-content {
-        font-size: 0.65rem;
-        padding: 0.4rem;
+        font-size: 0.75rem;
+        padding: 0.75rem;
     }
     
     .code-content pre {
-        font-size: 0.65rem;
+        font-size: 0.75rem;
+        white-space: pre;
     }
 }
 
