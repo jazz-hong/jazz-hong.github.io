@@ -1717,6 +1717,25 @@ footer {
     display: none;
 }
 
+/* Desktop/Mobile specific messages */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
     margin-left: 2rem;
