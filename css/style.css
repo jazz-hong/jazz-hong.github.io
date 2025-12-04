@@ -538,6 +538,101 @@ nav {
     }
 }
 
+/* Tablet Optimization (iPad and similar devices) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    nav {
+        padding: 1rem 3%;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+    }
+    
+    .nav-links a {
+        font-size: 1rem;
+    }
+    
+    .hero-container {
+        padding: 2rem;
+        gap: 2rem;
+    }
+    
+    .mega-glitch {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .stat-circle {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .skill-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .project-card {
+        padding: 1.5rem;
+    }
+    
+    .project-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .about-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+    
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .code-window {
+        height: 55vh;
+    }
+    
+    .code-content {
+        font-size: 0.95rem;
+    }
+}
+
 @media (max-width: 768px) {
     .mega-glitch {
         font-size: 2rem;
