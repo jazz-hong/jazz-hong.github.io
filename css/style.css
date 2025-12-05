@@ -1461,6 +1461,14 @@ footer {
         font-size: 0.85rem;
     }
     
+    .terminal-body {
+        text-align: left;
+    }
+    
+    .terminal-body .line {
+        text-align: left;
+    }
+    
     .cyber-sphere {
         max-width: 250px;
         margin: 1rem auto;
