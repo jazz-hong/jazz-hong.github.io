@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const typedTextElement = document.querySelector('.typed-text');
     if (typedTextElement) {
         const words = [
-            'Ethical Hacker',
             'AI Software Engineer',
             'Multimedia Producer',
-            'Penetration Tester'
+            'Penetration Tester',
+            'Digital Solution Marketing'
         ];
         new TypingEffect(typedTextElement, words);
     }
@@ -428,3 +428,59 @@ style.textContent = `
     body { transition: text-shadow 0.2s ease-out; text-shadow: var(--rgb-split) 0 0 red, calc(var(--rgb-split) * -1) 0 0 blue; }
 `;
 document.head.appendChild(style);
+
+// Falling Code Symbols Effect
+class FallingSymbols {
+    constructor() {
+        this.symbols = ['{', '}', '[', ']', '(', ')', '<', '>', '/', '\\', ';', ':', '0', '1', '0x', '#', '&', '|'];
+        this.particles = [];
+        this.maxParticles = 20; // sparse
+        this.createCanvas();
+    }
+
+    createCanvas() {
+        this.canvas = document.createElement('canvas');
+        this.canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;';
+        document.body.insertBefore(this.canvas, document.body.firstChild);
+        this.ctx = this.canvas.getContext('2d');
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        this.animate();
+    }
+
+    resize() {
+        this.width = this.canvas.width = window.innerWidth;
+        this.height = this.canvas.height = window.innerHeight;
+    }
+
+    spawn() {
+        if (this.particles.length >= this.maxParticles) return;
+        this.particles.push({
+            x: Math.random() * this.width,
+            y: -20,
+            size: 14 + Math.random() * 10,
+            speed: 0.5 + Math.random() * 0.5,
+            symbol: this.symbols[Math.floor(Math.random() * this.symbols.length)],
+            opacity: 0.4 + Math.random() * 0.4
+        });
+    }
+
+    draw() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.particles.forEach((p, i) => {
+            this.ctx.fillStyle = `rgba(0, 255, 0, ${p.opacity})`;
+            this.ctx.font = `${p.size}px 'Share Tech Mono', monospace`;
+            this.ctx.fillText(p.symbol, p.x, p.y);
+            p.y += p.speed;
+            if (p.y > this.height + 20) this.particles.splice(i, 1);
+        });
+        if (Math.random() < 0.02) this.spawn(); // slightly more frequent spawn
+    }
+
+    animate() {
+        this.draw();
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+new FallingSymbols();
