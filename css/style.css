@@ -358,11 +358,16 @@ nav {
 /* Cyber Sphere */
 .cyber-sphere {
     position: relative;
-    width: 100%;                 /* takes available width of right column */
-    max-width: 400px;            /* desktop cap */
-    aspect-ratio: 1 / 1;         /* keep it perfectly square */
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
     margin: 2rem auto;
-    perspective: 1000px;
+}
+
+#sphere-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .sphere-container {

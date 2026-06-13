@@ -138,12 +138,7 @@
                         </div>
                     </div>
                     <div class="cyber-sphere">
-                        <div class="sphere-container">
-                            <div class="ring ring-1"></div>
-                            <div class="ring ring-2"></div>
-                            <div class="ring ring-3"></div>
-                            <div class="core"></div>
-                        </div>
+                        <canvas id="sphere-canvas"></canvas>
                     </div>
                 </div>
             </div>
@@ -160,7 +155,7 @@
                 <div class="section-grid">
                     <div class="about-content">
                         <div class="about-text">
-                            <p>Hello and welcome! I'm Jazz, born and raised in the vibrant city of Kuching. With an MEng (Hons) in Electrical & Electronic Engineering from the University of Nottingham, I'm now based in Malaysia, exploring an exciting career in Artificial Intelligence and Software Development with SAINS.
+                            <p>Hello and welcome! I'm Jazz, born and raised in the vibrant city of Kuching. With an MEng (Hons) in Electrical & Electronic Engineering from the University of Nottingham, After years of shaping AI solutions across industry and government, I took the leap in 2026 to found <strong>Compute Systems & Solutions (CSS) Sdn. Bhd.</strong> — bringing my passion for machine learning, LLMs, and digital transformation into a company built to empower Sarawak's tech future. As Founder, I lead the product engineering and AI innovation roadmap.
                             <br><br>
                             But there's more to me than just work. I'm passionate about staying active! I recharge by swimming, trekking scenic hiking trails, and working out at the gym. Music also plays a big role in my life, allowing me to express creativity through piano and guitar. Plus, I love exploring new horizons through my YouTube music channel, where I share original compositions and creative music projects. Thanks for visiting my site, and I hope your day is filled with inspiration and discovery!</p>
                             <div class="skill-grid">
@@ -202,10 +197,28 @@
 
 //==================================================================
 
+[JOB 6: Founder]
+Title:      Founder
+Company:    Compute Systems & Solutions (CSS) Sdn. Bhd.
+Period:     <span class="timeline-period">Aug 2026 - Present</span>
+Summary:    Co-founded CSS to empower Sarawak's digital destiny.
+            Leading product engineering, AI innovation roadmap,
+            and technology strategy.
+Skills:
+  * Entrepreneurship
+  * AI Product Development
+  * LLM Integration
+  * Digital Transformation
+  * ERP Systems (Odoo)
+  * Business Strategy
+  * Team Leadership
+
+------------------------------------------------------------------
+
 [JOB 5: Software Engineer]
 Title:      Software Engineer (Data Science)
 Company:    Sarawak Information Systems Sdn. Bhd.
-Period:     <span class="timeline-period">Jan 2024 - Present</span>
+Period:     <span class="timeline-period-past">Jan 2024 - Aug 2026</span>
 Summary:    In charge of ICT Systems Integrator and Solutions Provider in Sarawak (AI Unit)
 Skills:
   * Product Owner
@@ -872,6 +885,99 @@ Activities:
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="js/script.js"></script>
+    <script>
+    (function () {
+        const canvas = document.getElementById('sphere-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const PRIMARY = '#00ff00';
+
+        function resize() {
+            const parent = canvas.parentElement;
+            const size = Math.min(parent.offsetWidth, parent.offsetHeight);
+            canvas.width = size;
+            canvas.height = size;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        let angle = 0;
+
+        function project(x, y, z, globalAngle, cx, cy, r) {
+            const cosA = Math.cos(globalAngle), sinA = Math.sin(globalAngle);
+            const rx = x * cosA - z * sinA;
+            const ry = y;
+            const rz = x * sinA + z * cosA;
+            const fov = 3;
+            const scale = fov / (fov + rz);
+            return { x: cx + rx * r * scale, y: cy + ry * r * scale };
+        }
+
+        function drawRing(tiltX, tiltY, tiltZ, radiusScale) {
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const r = (Math.min(canvas.width, canvas.height) / 2) * 0.82 * radiusScale;
+            const steps = 120;
+            ctx.beginPath();
+            for (let i = 0; i <= steps; i++) {
+                const t = (i / steps) * Math.PI * 2;
+                let x = Math.cos(t), y = Math.sin(t), z = 0;
+                // rotateX
+                let y1 = y * Math.cos(tiltX) - z * Math.sin(tiltX);
+                let z1 = y * Math.sin(tiltX) + z * Math.cos(tiltX);
+                // rotateY
+                let x2 = x * Math.cos(tiltY) + z1 * Math.sin(tiltY);
+                let z2 = -x * Math.sin(tiltY) + z1 * Math.cos(tiltY);
+                // rotateZ
+                let x3 = x2 * Math.cos(tiltZ) - y1 * Math.sin(tiltZ);
+                let y3 = x2 * Math.sin(tiltZ) + y1 * Math.cos(tiltZ);
+                const p = project(x3, y3, z2, angle, cx, cy, r);
+                i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+            }
+            ctx.strokeStyle = PRIMARY;
+            ctx.lineWidth = 1.5;
+            ctx.shadowColor = PRIMARY;
+            ctx.shadowBlur = 6;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+
+        function drawCore() {
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const r = 14;
+            // Outer glow
+            const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 3);
+            glow.addColorStop(0, 'rgba(0,255,0,0.3)');
+            glow.addColorStop(1, 'rgba(0,255,0,0)');
+            ctx.beginPath();
+            ctx.arc(cx, cy, r * 3, 0, Math.PI * 2);
+            ctx.fillStyle = glow;
+            ctx.fill();
+            // Core ball
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.fillStyle = PRIMARY;
+            ctx.shadowColor = PRIMARY;
+            ctx.shadowBlur = 20;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const deg60 = Math.PI / 3;
+            drawRing(deg60, 0, 0, 1.0);   // ring-1: rotateX(60deg)
+            drawRing(0, deg60, 0, 0.8);   // ring-2: rotateY(60deg)
+            drawRing(0, 0, deg60, 0.6);   // ring-3: rotateZ(60deg)
+            drawCore();
+            angle += (Math.PI * 2) / (20 * 60); // 20s full rotation at 60fps
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    })();
+    </script>
 </body>
 </html>
 
