@@ -4,9 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typedTextElement) {
         const words = [
             'AI Software Engineer',
-            'Multimedia Producer',
-            'Penetration Tester',
-            'Digital Solution Marketing'
+            'Digital Solution Marketing',
+            'AI Solutions Architect',
+            'Prompt Engineer',
+            'Tech Entrepreneur'
         ];
         new TypingEffect(typedTextElement, words);
     }
