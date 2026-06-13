@@ -1332,8 +1332,7 @@ footer {
         max-width: 100% !important;
     }
     
-    /* Force all grids to single column on mobile */
-    .skill-grid,
+    /* Force non-about grids to single column on mobile */
     .tech-grid,
     .projects-grid,
     .card-grid {
@@ -1426,8 +1425,8 @@ footer {
     }
     
     .hero-stats {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
         margin: 2rem 0;
     }
     
@@ -1530,33 +1529,36 @@ footer {
     .skill-grid {
         grid-template-columns: 1fr !important;
         display: grid !important;
-        gap: 1.5rem;
-        margin-top: 2rem;
+        gap: 1rem;
+        margin-top: 1.5rem;
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 0.5rem;
-    }
-    
-    .skill-item {
-        padding: 1.5rem;
-        width: 100% !important;
-        max-width: 100% !important;
+        padding: 0;
         box-sizing: border-box;
+    }
+
+    .skill-item {
+        padding: 1.2rem 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        grid-column: 1 / -1 !important;
     }
-    
+
     .skill-icon {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
     }
-    
+
     .skill-item h3 {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
     }
-    
+
     .skill-item p {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
+        line-height: 1.5;
     }
     
     /* About Visual Section Mobile */
@@ -1739,13 +1741,19 @@ footer {
         max-width: 100% !important;
     }
     
-    /* Force vertical stacking for all grids */
-    .skill-grid,
-    .tech-grid, 
+    /* Force vertical stacking for all grids except about cards */
+    .tech-grid,
     .projects-grid,
     .card-grid {
         grid-template-columns: 1fr !important;
         width: 100% !important;
+    }
+
+    /* About cards: single column on very small screens */
+    .skill-grid {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        padding: 0 !important;
     }
     
     .mega-glitch {
@@ -1947,7 +1955,7 @@ footer {
 
 .skill-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -2637,3 +2645,250 @@ body::before {
     pointer-events: none;
     z-index: 0; /* stays behind everything */
 }
+
+/* ============================================
+   VERTICAL BIG SCREEN TIMELINE
+   Scroll down = travel back in time
+   ============================================ */
+.timeline-section {
+    padding: 5rem 0 7rem;
+    position: relative;
+}
+
+.timeline-subtitle {
+    font-family: var(--font-mono);
+    color: rgba(0, 255, 0, 0.45);
+    font-size: 0.85rem;
+    margin: -1rem 0 4rem 5%;
+    letter-spacing: 0.05em;
+}
+
+/* Vertical container */
+.ts-vertical {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* The continuous glowing center line */
+.ts-vertical::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        to bottom,
+        var(--primary-color) 0%,
+        rgba(0, 255, 0, 0.4) 60%,
+        transparent 100%
+    );
+    z-index: 0;
+}
+
+/* Entry row — alternates left / right */
+.tsv-entry {
+    display: flex;
+    justify-content: flex-end;   /* card sits on the LEFT half */
+    width: 50%;
+    padding-right: 3.5rem;
+    margin-bottom: 5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.tsv-entry:nth-child(even) {
+    justify-content: flex-start;  /* card sits on the RIGHT half */
+    margin-left: 50%;
+    padding-right: 0;
+    padding-left: 3.5rem;
+}
+
+/* Dot on the center line */
+.tsv-dot {
+    position: absolute;
+    right: -10px;
+    top: 1.8rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    background: #000;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    z-index: 3;
+    transition: box-shadow 0.3s;
+}
+
+.tsv-entry:nth-child(even) .tsv-dot {
+    right: auto;
+    left: -10px;
+}
+
+.tsv-current .tsv-dot {
+    background: var(--primary-color);
+    animation: tsvPulse 2s ease-in-out infinite;
+}
+
+@keyframes tsvPulse {
+    0%, 100% { box-shadow: 0 0 10px var(--primary-color); }
+    50%       { box-shadow: 0 0 28px var(--primary-color), 0 0 50px rgba(0,255,0,0.35); }
+}
+
+.tsv-entry:hover .tsv-dot {
+    box-shadow: 0 0 20px var(--primary-color);
+}
+
+/* The card itself */
+.tsv-card {
+    background: rgba(0, 255, 0, 0.04);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 2.2rem 2rem;
+    width: 100%;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.tsv-current .tsv-card {
+    background: rgba(0, 255, 0, 0.07);
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
+}
+
+.tsv-entry:hover .tsv-card {
+    background: rgba(0, 255, 0, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+/* Period label */
+.tsv-period {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--primary-color);
+    opacity: 0.85;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.04em;
+}
+
+/* Tag badge */
+.tsv-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.07em;
+    color: #000;
+    background: var(--primary-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+}
+
+.tsv-edu .tsv-tag {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+/* Title */
+.tsv-title {
+    font-size: 1.7rem;
+    color: #fff;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+    line-height: 1.25;
+}
+
+/* Company */
+.tsv-company {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: rgba(0, 255, 0, 0.75);
+    margin: 0 0 1.1rem;
+    line-height: 1.4;
+}
+
+/* Description */
+.tsv-desc {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.75;
+    margin: 0 0 1.4rem;
+}
+
+/* Skill tags */
+.tsv-skills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tsv-skills li {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: rgba(0, 255, 0, 0.7);
+    border: 1px solid rgba(0, 255, 0, 0.4);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.tsv-entry:hover .tsv-skills li {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Mobile: collapse to single column, line on left */
+@media (max-width: 768px) {
+    .ts-vertical {
+        padding: 0 1rem 0 2.5rem;
+        max-width: 100%;
+    }
+
+    .ts-vertical::before {
+        left: 0.75rem;
+        transform: none;
+    }
+
+    .tsv-entry,
+    .tsv-entry:nth-child(even) {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
+        padding-left: 2rem;
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .tsv-dot,
+    .tsv-entry:nth-child(even) .tsv-dot {
+        left: -1.9rem;
+        right: auto;
+        top: 1.4rem;
+        width: 14px;
+        height: 14px;
+    }
+
+    .tsv-card {
+        padding: 1.4rem 1.2rem;
+    }
+
+    .tsv-title {
+        font-size: 1.1rem;
+    }
+
+    .tsv-desc {
+        font-size: 0.85rem;
+    }
+
+    .timeline-subtitle {
+        margin-left: 1rem;
+    }
+}
+

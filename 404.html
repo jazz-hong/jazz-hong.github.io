@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+    // GitHub Pages 404 → SPA redirect trick
+    // Store the full URL the visitor tried to open, then bounce them to the root.
+    // The main index.html will read this from sessionStorage and scroll to the right section.
+    sessionStorage.setItem('__redirect', location.href);
+    location.replace('https://jazz-hong.github.io/');
+    </script>
+</head>
+<body></body>
+</html>
