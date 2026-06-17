@@ -340,33 +340,58 @@ class CodeTypingEffect {
     }
 }
 
-function initContactForm() {
-    const form = document.getElementById('contact-form');
-    if (!form) return;
-    form.addEventListener('submit', async(e) => {
-        e.preventDefault();
-        const submitBtn = form.querySelector('.submit-btn');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const originalText = btnText.textContent;
+function initContactForm() { /* wired via onsubmit — see handleContactSubmit */ }
 
-        submitBtn.disabled = true;
-        btnText.textContent = 'Encrypting...';
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        btnText.textContent = 'Transmitting...';
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        btnText.textContent = 'Message Sent!';
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        form.reset();
-        document.querySelectorAll('.form-group.is-filled').forEach(el => el.classList.remove('is-filled'));
-        submitBtn.disabled = false;
-        btnText.textContent = originalText;
-    });
+async function handleContactSubmit(e) {
+    e.preventDefault();
 
-    document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
-        input.addEventListener('blur', (e) => {
-            e.target.parentElement.classList.toggle('is-filled', e.target.value !== '');
+    const EMAILJS_SERVICE_ID  = 'service_v5qbr8h';
+    const EMAILJS_TEMPLATE_ID = 'template_nkldeoq';
+
+    const submitBtn = document.querySelector('#contact-form .submit-btn');
+    if (submitBtn.disabled) return;   // block any double-fire
+    const btnText   = submitBtn.querySelector('.btn-text');
+    const statusEl  = document.getElementById('cf-status');
+
+    const fromName = document.getElementById('cf-name').value.trim();
+    const replyTo  = document.getElementById('cf-email').value.trim();
+    const message  = document.getElementById('cf-message').value.trim();
+
+    if (!fromName || !replyTo || !message) {
+        statusEl.textContent = '[ ERROR ] All fields are required.';
+        statusEl.className = 'cf-status cf-error';
+        return;
+    }
+
+    submitBtn.disabled = true;
+    btnText.textContent = 'Transmitting...';
+    statusEl.textContent = '';
+    statusEl.className = 'cf-status';
+
+    try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            from_name: fromName,
+            reply_to:  replyTo,
+            message:   message
         });
-    });
+
+        // Clear fields
+        document.getElementById('cf-name').value    = '';
+        document.getElementById('cf-email').value   = '';
+        document.getElementById('cf-message').value = '';
+        btnText.textContent = 'Transmit Message';
+        submitBtn.disabled = false;
+
+        // Show success overlay
+        document.getElementById('contact-success-overlay').style.display = 'flex';
+
+    } catch (err) {
+        console.error('EmailJS error:', err);
+        btnText.textContent = 'Transmit Message';
+        submitBtn.disabled = false;
+        statusEl.textContent = '[ ERROR ] Transmission failed. Email me directly: jazzhong@outlook.com';
+        statusEl.className = 'cf-status cf-error';
+    }
 }
 
 function initProjectCards() {
