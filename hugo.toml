@@ -1,0 +1,11 @@
+baseURL = 'https://jazz-hong.github.io/'
+languageCode = 'en-us'
+title = 'Jazz Hong | AI Software Engineer & Founder'
+enableRobotsTXT = true
+disableKinds = ['taxonomy', 'term', 'RSS']
+
+[params]
+  description = 'AI Software Engineer, Founder of Compute Systems & Solutions (CSS) Sdn. Bhd., and LLM specialist based in Kuching, Sarawak.'
+
+[markup.goldmark.renderer]
+  unsafe = true

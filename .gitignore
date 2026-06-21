@@ -1,7 +1,14 @@
-# macOS system files
+# macOS
 .DS_Store
-**/.DS_Store
 
 # Logs
 *.log
 debug.log
+
+# Hugo build output
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# Local environment
+.env

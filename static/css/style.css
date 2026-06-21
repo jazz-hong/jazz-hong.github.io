@@ -86,6 +86,21 @@ nav {
     color: var(--hover-color);
 }
 
+.nav-links a.active {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    padding-bottom: 2px;
+}
+
+/* Logo link — inherits nav colour, no underline */
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
 /* Modern Hero Section */
 .hero {
     position: relative;
@@ -665,10 +680,15 @@ nav {
 /* Sections */
 section {
     padding: 5rem 2rem;
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+}
+
+/* Multi-page: wrapper that offsets the fixed nav */
+.content-wrapper {
+    padding-top: 4rem;
 }
 
 .section-title {
@@ -1868,6 +1888,22 @@ footer {
         padding: 0 1rem;
     }
 
+    .info-card {
+        order: 1;
+    }
+
+    .contact-fields-top {
+        order: 2;
+    }
+
+    .contact-fields-bottom {
+        order: 3;
+    }
+
+    .contact-methods {
+        order: 4;
+    }
+
     .contact-message-group .form-textarea {
         min-height: 150px;
     }
@@ -2042,6 +2078,63 @@ footer {
 }
 
 @media (max-width: 768px) {
+    body.nav-open {
+        overflow: hidden !important;
+    }
+
+    nav {
+        position: relative;
+        z-index: 1200;
+    }
+
+    .logo {
+        max-width: calc(100% - 58px);
+        white-space: nowrap;
+    }
+
+    .nav-links {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        min-height: 100dvh;
+        width: 100vw;
+        padding: 5.5rem 1.5rem 2rem;
+        background: rgba(0, 0, 0, 0.98);
+        border-top: 0;
+        z-index: 1050;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li {
+        border-bottom: 1px solid rgba(0, 255, 0, 0.16);
+    }
+
+    .nav-links a {
+        padding: 1.1rem;
+        font-size: 1.15rem;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: transparent;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        font-size: 1.35rem;
+        cursor: pointer;
+        position: relative;
+        z-index: 1300;
+    }
+
     .mobile-only {
         display: block !important;
     }
@@ -2572,7 +2665,6 @@ footer {
     }
 }
 
-/* Crazy Cyberpunk Effects */
 .section {
     position: relative;
     overflow: hidden;
@@ -2588,209 +2680,14 @@ footer {
     height: 100%;
 }
 
-@keyframes gridMove {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 60px 60px;
-    }
-}
-
-.section-title {
-    animation: crazyText 5s infinite;
-    filter: drop-shadow(0 0 10px var(--primary-color))
-           drop-shadow(0 0 20px var(--primary-color))
-           drop-shadow(0 0 30px var(--primary-color));
-}
-
-@keyframes crazyText {
-    0%, 100% {
-        transform: scale(1) rotate(0deg);
-        filter: hue-rotate(0deg);
-    }
-    25% {
-        transform: scale(1.1) rotate(2deg);
-        filter: hue-rotate(90deg);
-    }
-    50% {
-        transform: scale(0.9) rotate(-2deg);
-        filter: hue-rotate(180deg);
-    }
-    75% {
-        transform: scale(1.1) rotate(2deg);
-        filter: hue-rotate(270deg);
-    }
-}
-
 .section-title::before {
-    text-shadow: 5px 5px 0 rgba(255,0,0,0.5),
-                -5px -5px 0 rgba(0,255,255,0.5);
-    animation: glitch-1 3s infinite linear alternate-reverse,
-               crazyGlitch 1s infinite steps(2);
+    text-shadow: 3px 0 var(--primary-color);
+    animation: glitch-1 3s infinite linear alternate-reverse;
 }
 
 .section-title::after {
-    text-shadow: -5px 5px 0 rgba(255,255,0,0.5),
-                 5px -5px 0 rgba(0,255,0,0.5);
-    animation: glitch-2 2s infinite linear alternate-reverse,
-               crazyGlitch 2s infinite steps(3);
-}
-
-@keyframes crazyGlitch {
-    0% {
-        transform: translate(0);
-    }
-    20% {
-        transform: translate(-10px, 10px) scale(1.1);
-    }
-    40% {
-        transform: translate(10px, -10px) skew(10deg);
-    }
-    60% {
-        transform: translate(-5px, 5px) rotate(5deg);
-    }
-    80% {
-        transform: translate(5px, -5px) scale(0.9);
-    }
-    100% {
-        transform: translate(0);
-    }
-}
-
-/* Add scanning line effect */
-.section::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        transparent,
-        rgba(var(--primary-rgb), 0.1),
-        rgba(var(--primary-rgb), 0.2),
-        rgba(var(--primary-rgb), 0.1),
-        transparent
-    );
-    transform: rotate(45deg);
-    animation: scanline 8s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes scanline {
-    0% {
-        transform: rotate(45deg) translateY(-100%);
-    }
-    100% {
-        transform: rotate(45deg) translateY(100%);
-    }
-}
-
-/* Add hover effects to cards and elements */
-.project-card,
-.skill-item,
-.contact-info {
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.project-card:hover,
-.skill-item:hover,
-.contact-info:hover {
-    transform: scale(1.05) translateY(-5px);
-    box-shadow: 
-        0 0 20px var(--primary-color),
-        0 0 40px var(--primary-color),
-        0 0 60px var(--primary-color);
-    z-index: 1;
-}
-
-.project-card:hover::before,
-.skill-item:hover::before,
-.contact-info:hover::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, 
-        var(--primary-color), 
-        transparent,
-        var(--primary-color),
-        transparent,
-        var(--primary-color)
-    );
-    z-index: -1;
-    animation: borderGlow 1s linear infinite;
-    border-radius: 4px;
-}
-
-@keyframes borderGlow {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 200% 0%;
-    }
-}
-
-/* Add random glitch particles */
-.section {
-    position: relative;
-}
-
-.glitch-particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: var(--primary-color);
-    pointer-events: none;
-    animation: particle 1s linear infinite;
-}
-
-@keyframes particle {
-    0% {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--x, 100px), var(--y, 100px));
-        opacity: 0;
-    }
-}
-
-@keyframes textGlitch {
-    0%, 100% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-}
-
-@keyframes colorShift {
-    0% { filter: hue-rotate(0deg) brightness(1); }
-    25% { filter: hue-rotate(90deg) brightness(1.2); }
-    50% { filter: hue-rotate(180deg) brightness(1); }
-    75% { filter: hue-rotate(270deg) brightness(1.2); }
-    100% { filter: hue-rotate(360deg) brightness(1); }
-}
-
-@keyframes glitchText {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 3px); }
-    40% { transform: translate(-3px, -3px) skewX(10deg); }
-    60% { transform: translate(3px, 3px) skewY(-5deg); }
-    80% { transform: translate(3px, -3px) skewX(-10deg); }
-    100% { transform: translate(0); }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translate(0); }
-    25% { transform: translate(1px); }
-    50% { transform: translate(-1px); }
-    75% { transform: translate(1px); }
+    text-shadow: -3px 0 var(--primary-color);
+    animation: glitch-2 2s infinite linear alternate-reverse;
 }
 
 .logo {

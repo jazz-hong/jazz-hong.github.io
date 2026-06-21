@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }}</title>
+    <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+    <link rel="canonical" href="{{ .Permalink }}">
+    <meta name="author" content="Jazz Hong">
+    <meta name="keywords" content="Jazz Hong, AI Software Engineer, LLM, Machine Learning, Kuching, Sarawak, CSS Sdn Bhd, Compute Systems Solutions, Python, LangChain, RAG">
+    <!-- OpenGraph -->
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Description | default .Site.Params.description }}">
+    <meta property="og:image" content="https://jazz-hong.github.io/assets/img/Profile.jpg">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ .Title }}">
+    <meta name="twitter:description" content="{{ .Description | default .Site.Params.description }}">
+    <meta name="twitter:image" content="https://jazz-hong.github.io/assets/img/Profile.jpg">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body class="page-{{ .Params.page_id }}">
+    <div class="glitch-overlay"></div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/" class="logo-link">
+                    <span class="bracket">[</span>
+                    <span class="hack-text"></span>
+                    <span class="bracket">]</span>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="site-navigation">
+                <li><a href="/" class="glitch-effect{{ if eq .Params.page_id "home" }} active{{ end }}">HOME</a></li>
+                <li><a href="/about/" class="glitch-effect{{ if eq .Params.page_id "about" }} active{{ end }}">ABOUT</a></li>
+                <li><a href="/timeline/" class="glitch-effect{{ if eq .Params.page_id "timeline" }} active{{ end }}">TIMELINE</a></li>
+                <li><a href="/skills/" class="glitch-effect{{ if eq .Params.page_id "skills" }} active{{ end }}">SKILLS</a></li>
+                <li><a href="/projects/" class="glitch-effect{{ if eq .Params.page_id "projects" }} active{{ end }}">ACCOMPLISHMENTS</a></li>
+                <li><a href="/certifications/" class="glitch-effect{{ if eq .Params.page_id "certifications" }} active{{ end }}">CERTIFICATIONS</a></li>
+                <li><a href="/contact/" class="glitch-effect{{ if eq .Params.page_id "contact" }} active{{ end }}">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/jazz-hong" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/jazz-hong-6604bb205/" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.youtube.com/@melody.aa11/" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="copyright">&copy; 2026 | Secured with <span class="heart">❤</span> by Jazz Hong</p>
+    </footer>
+
+    <!-- Page-specific scripts loaded before main script -->
+    {{ if eq .Params.page_id "home" }}
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    {{ end }}
+
+    {{ if eq .Params.page_id "contact" }}
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>emailjs.init({ publicKey: 'PdAdqIS81ec6ZuhgV' });</script>
+    {{ end }}
+
+    <!-- Main script -->
+    <script src="/js/script.js"></script>
+
+    <!-- Sphere canvas (home only) -->
+    {{ if eq .Params.page_id "home" }}
+    <script src="/js/sphere.js"></script>
+    {{ end }}
+</body>
+</html>

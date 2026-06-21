@@ -1,0 +1,77 @@
+---
+title: "Contact — Jazz Hong"
+description: "Get in touch with Jazz Hong — AI Software Engineer and Founder of CSS Sdn. Bhd. Open to collaborations, opportunities, and interesting conversations."
+page_id: "contact"
+url: "/contact/"
+---
+
+<div class="content-wrapper">
+    <section class="section">
+        <h2 class="section-title" data-text="Contact">Contact</h2>
+        <div class="contact-container">
+            <!-- Row 1, Col 1: info card -->
+            <div class="info-card">
+                <div class="card-header">
+                    <i class="fas fa-satellite-dish"></i>
+                    <h3>Get In Touch</h3>
+                </div>
+                <p>Open to collaborations, opportunities, and interesting conversations.</p>
+            </div>
+
+            <!-- Row 1, Col 2: name + email fields -->
+            <div class="contact-fields-top">
+                <div class="form-group">
+                    <label for="cf-name" class="form-label">// Name</label>
+                    <input type="text" id="cf-name" name="from_name" form="contact-form" class="form-input" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="cf-email" class="form-label">// Email</label>
+                    <input type="email" id="cf-email" name="reply_to" form="contact-form" class="form-input" placeholder="your@email.com" required>
+                </div>
+            </div>
+
+            <!-- Row 2, Col 1: contact links -->
+            <div class="contact-methods">
+                <a href="mailto:jazzhong@outlook.com" class="contact-method">
+                    <i class="fas fa-envelope"></i>
+                    <span>jazzhong@outlook.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/jazz-hong-6604bb205/" target="_blank" class="contact-method">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/jazz-hong" target="_blank" class="contact-method">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://www.youtube.com/@melody.aa11/" target="_blank" class="contact-method">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+            </div>
+
+            <!-- Row 2, Col 2: message + submit -->
+            <form id="contact-form" class="contact-fields-bottom" novalidate onsubmit="handleContactSubmit(event)">
+                <div class="form-group contact-message-group">
+                    <label for="cf-message" class="form-label">// Message</label>
+                    <textarea id="cf-message" name="message" class="form-input form-textarea" placeholder="What's on your mind?" required></textarea>
+                </div>
+                <div id="cf-status" class="cf-status" aria-live="polite"></div>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Transmit Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+</div>
+
+<!-- Success overlay -->
+<div id="contact-success-overlay" class="contact-success-overlay" style="display:none">
+    <div class="contact-success-box">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <h3 class="success-title">Message Transmitted</h3>
+        <p class="success-msg">Thanks for reaching out! I'll get back to you as soon as possible.</p>
+        <button class="success-close-btn" onclick="document.getElementById('contact-success-overlay').style.display='none'">Close</button>
+    </div>
+</div>

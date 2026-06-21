@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Typing effect for the hero subtitle
+    initMobileNavigation();
+
+    // Typing effect for the hero subtitle (home page only)
     const typedTextElement = document.querySelector('.typed-text');
     if (typedTextElement) {
         const words = [
@@ -14,15 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Typing effect for the logo
     const hackTextElement = document.querySelector('.hack-text');
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
     if (hackTextElement) {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         if (isMobile) {
-            // Typing effect for mobile notice, stays after typing
-            new TypingEffect(hackTextElement, ['Please use a PC to view'], 1000000); // Large wait time to prevent deletion
+            hackTextElement.textContent = 'Please use a PC to view';
         } else {
-            // Normal typing effect for desktop
             new TypingEffect(hackTextElement, [
                 'Welcome My Friend',
                 'Enter The Terminal',
@@ -33,31 +31,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initialize Matrix Rain
+    // Initialize Matrix Rain (home page only)
     const matrixCanvas = document.getElementById('matrix-canvas');
-    if (matrixCanvas) {
+    if (matrixCanvas instanceof HTMLCanvasElement) {
         new MatrixRain(matrixCanvas);
     }
 
-    // Animate Stats on scroll
+    // Animate Stats on scroll (home page only)
     const stats = document.querySelectorAll('.stat-number');
     if (stats.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     animateStats();
-                    // Unobserve all stats once the first one is visible to prevent re-triggering
                     stats.forEach(s => observer.unobserve(s));
                 }
             });
         }, { threshold: 0.8 });
-        // Observe each stat number
-        stats.forEach(stat => {
-            observer.observe(stat);
-        });
+        stats.forEach(stat => observer.observe(stat));
     }
 
-    // Initialize Terminal Simulation
+    // Initialize Terminal Simulation (home page only)
     const terminalBody = document.querySelector('.terminal-body');
     if (terminalBody) {
         new TerminalSimulation(terminalBody);
@@ -68,17 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Intersection Observer for animations
     initIntersectionObserver();
-    
+
     // Initialize form
     initContactForm();
-
-    // Initialize glitch effects for project cards
-    initProjectCards();
 
     // Initialize code window typing effect
     const codeContent = document.querySelector('.code-content code');
     if (codeContent) {
-       const observer = new IntersectionObserver((entries, obs) => {
+        const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     new CodeTypingEffect(codeContent);
@@ -89,39 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(codeContent);
     }
 
-    // Smooth scrolling + clean URL for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const hash = this.getAttribute('href');
-            const target = document.querySelector(hash);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Update URL cleanly e.g. /about instead of /#about
-                const cleanPath = '/' + hash.replace('#', '');
-                history.replaceState(null, '', cleanPath === '/home' ? '/' : cleanPath);
-            }
-        });
-    });
-
-    // Handle redirect from 404.html — if someone visits /about directly
-    const redirectUrl = sessionStorage.getItem('__redirect');
-    if (redirectUrl) {
-        sessionStorage.removeItem('__redirect');
-        const redirectPath = new URL(redirectUrl).pathname.replace(/^\//, '').replace(/\/$/, '');
-        if (redirectPath) {
-            const target = document.getElementById(redirectPath);
-            if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
-            history.replaceState(null, '', '/' + redirectPath);
-        }
-    }
-
-    // Initialize crazy effects
-    createGlitchParticles();
-    addRGBSplitEffect();
-    addGlitchOnHover();
-
-    // Initialize particles.js if the library is loaded
+    // Initialize particles.js (home page only)
     if (typeof particlesJS !== 'undefined') {
         const particlesContainer = document.getElementById('particles-js');
         if (particlesContainer) {
@@ -144,25 +103,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Hamburger menu toggle for mobile
+});
+
+function initMobileNavigation() {
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('open');
+    const navIcon = navToggle ? navToggle.querySelector('i') : null;
+    if (!navToggle || !navLinks) return;
+
+    const setMenuOpen = (isOpen) => {
+        navLinks.classList.toggle('open', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        if (navIcon) {
+            navIcon.classList.toggle('fa-bars', !isOpen);
+            navIcon.classList.toggle('fa-xmark', isOpen);
+        }
+    };
+
+    navToggle.addEventListener('click', function() {
+        setMenuOpen(!navLinks.classList.contains('open'));
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            setMenuOpen(false);
         });
-    }
-});
+    });
+}
 
 class MatrixRain {
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
         this.characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        this.fontSize = 14;
+        this.fontSize = 22;
         this.columns = 0;
         this.drops = [];
         this.animationFrameId = null;
+        this.frame = 0;
+        this.speed = 3;
 
         this.initialize();
         window.addEventListener('resize', () => this.initialize());
@@ -183,20 +163,24 @@ class MatrixRain {
     }
 
     draw() {
-        this.ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+        this.animationFrameId = requestAnimationFrame(() => this.draw());
+        this.frame++;
+        if (this.frame % this.speed !== 0) return;
+
+        this.ctx.fillStyle = 'rgba(10, 10, 10, 0.12)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
+        this.ctx.fillStyle = 'rgba(0, 255, 0, 0.32)';
         this.ctx.font = this.fontSize + 'px monospace';
 
         for (let i = 0; i < this.drops.length; i++) {
+            if (i % 3 !== 0) continue;
             const char = this.characters[Math.floor(Math.random() * this.characters.length)];
             this.ctx.fillText(char, i * this.fontSize, this.drops[i] * this.fontSize);
-            if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
+            if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.985) {
                 this.drops[i] = 0;
             }
             this.drops[i]++;
         }
-        this.animationFrameId = requestAnimationFrame(() => this.draw());
     }
 }
 
@@ -250,7 +234,7 @@ function animateStats() {
 
         stat.textContent = '0';
         let current = 0;
-        const increment = target / 50; // Animate over 50 steps
+        const increment = target / 50;
 
         const updateCount = () => {
             if (current < target) {
@@ -362,7 +346,7 @@ async function handleContactSubmit(e) {
     const EMAILJS_TEMPLATE_ID = 'template_nkldeoq';
 
     const submitBtn = document.querySelector('#contact-form .submit-btn');
-    if (submitBtn.disabled) return;   // block any double-fire
+    if (submitBtn.disabled) return;
     const btnText   = submitBtn.querySelector('.btn-text');
     const statusEl  = document.getElementById('cf-status');
 
@@ -388,14 +372,12 @@ async function handleContactSubmit(e) {
             message:   message
         });
 
-        // Clear fields
         document.getElementById('cf-name').value    = '';
         document.getElementById('cf-email').value   = '';
         document.getElementById('cf-message').value = '';
         btnText.textContent = 'Transmit Message';
         submitBtn.disabled = false;
 
-        // Show success overlay
         document.getElementById('contact-success-overlay').style.display = 'flex';
 
     } catch (err) {
@@ -407,119 +389,9 @@ async function handleContactSubmit(e) {
     }
 }
 
-function initProjectCards() {
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('mouseover', () => card.classList.add('glitch-active'));
-        card.addEventListener('mouseout', () => card.classList.remove('glitch-active'));
-    });
-}
-
-function createGlitchParticles() {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        for (let i = 0; i < 5; i++) {
-            createParticle(section);
-        }
-    });
-}
-
-function createParticle(section) {
-    const particle = document.createElement('div');
-    particle.className = 'glitch-particle';
-    particle.style.left = `${Math.random() * 100}%`;
-    particle.style.top = `${Math.random() * 100}%`;
-    particle.style.setProperty('--x', `${(Math.random() - 0.5) * 200}px`);
-    particle.style.setProperty('--y', `${(Math.random() - 0.5) * 200}px`);
-    section.appendChild(particle);
-    setTimeout(() => particle.remove(), 1000 + Math.random() * 1000);
-}
-
-function addRGBSplitEffect() {
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const scrollDelta = Math.abs(window.scrollY - lastScrollY);
-                const intensity = Math.min(scrollDelta / 50, 5);
-                document.documentElement.style.setProperty('--rgb-split', `${intensity}px`);
-                lastScrollY = window.scrollY;
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-}
-
-function addGlitchOnHover() {
-    document.querySelectorAll('.cta-button, .social-link, .nav-links a').forEach(element => {
-        element.addEventListener('mouseover', () => element.classList.add('glitch-active'));
-        element.addEventListener('mouseout', () => element.classList.remove('glitch-active'));
-    });
-}
-
 const style = document.createElement('style');
 style.textContent = `
     .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
     .animate { opacity: 1; transform: translate(0, 0); }
-    .glitch-active { animation: crazyGlitch 0.3s infinite; }
-    :root { --rgb-split: 0px; }
-    body { transition: text-shadow 0.2s ease-out; text-shadow: var(--rgb-split) 0 0 red, calc(var(--rgb-split) * -1) 0 0 blue; }
 `;
 document.head.appendChild(style);
-
-// Falling Code Symbols Effect
-class FallingSymbols {
-    constructor() {
-        this.symbols = ['{', '}', '[', ']', '(', ')', '<', '>', '/', '\\', ';', ':', '0', '1', '0x', '#', '&', '|'];
-        this.particles = [];
-        this.maxParticles = 20; // sparse
-        this.createCanvas();
-    }
-
-    createCanvas() {
-        this.canvas = document.createElement('canvas');
-        this.canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;';
-        document.body.insertBefore(this.canvas, document.body.firstChild);
-        this.ctx = this.canvas.getContext('2d');
-        this.resize();
-        window.addEventListener('resize', () => this.resize());
-        this.animate();
-    }
-
-    resize() {
-        this.width = this.canvas.width = window.innerWidth;
-        this.height = this.canvas.height = window.innerHeight;
-    }
-
-    spawn() {
-        if (this.particles.length >= this.maxParticles) return;
-        this.particles.push({
-            x: Math.random() * this.width,
-            y: -20,
-            size: 14 + Math.random() * 10,
-            speed: 0.5 + Math.random() * 0.5,
-            symbol: this.symbols[Math.floor(Math.random() * this.symbols.length)],
-            opacity: 0.4 + Math.random() * 0.4
-        });
-    }
-
-    draw() {
-        this.ctx.clearRect(0, 0, this.width, this.height);
-        this.particles.forEach((p, i) => {
-            this.ctx.fillStyle = `rgba(0, 255, 0, ${p.opacity})`;
-            this.ctx.font = `${p.size}px 'Share Tech Mono', monospace`;
-            this.ctx.fillText(p.symbol, p.x, p.y);
-            p.y += p.speed;
-            if (p.y > this.height + 20) this.particles.splice(i, 1);
-        });
-        if (Math.random() < 0.02) this.spawn(); // slightly more frequent spawn
-    }
-
-    animate() {
-        this.draw();
-        requestAnimationFrame(() => this.animate());
-    }
-}
-
-new FallingSymbols();
