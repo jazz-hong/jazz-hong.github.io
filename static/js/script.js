@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hackTextElement) {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         if (isMobile) {
-            hackTextElement.textContent = 'Please use a PC to view';
+            new TypingEffect(hackTextElement, ['Please use a PC to view'], 3000);
         } else {
             new TypingEffect(hackTextElement, [
                 'Welcome My Friend',
