@@ -955,7 +955,7 @@ section {
 }
 
 .project-content p {
-    text-align: justify;
+    text-align: left;
 }
 
 .project-tech {
@@ -3085,4 +3085,3 @@ body::before {
         margin-left: 1rem;
     }
 }
-
