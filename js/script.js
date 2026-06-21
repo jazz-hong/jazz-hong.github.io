@@ -89,19 +89,32 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(codeContent);
     }
 
-    // Add smooth scrolling for navigation links
+    // Smooth scrolling + clean URL for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const hash = this.getAttribute('href');
+            const target = document.querySelector(hash);
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Update URL cleanly e.g. /about instead of /#about
+                const cleanPath = '/' + hash.replace('#', '');
+                history.replaceState(null, '', cleanPath === '/home' ? '/' : cleanPath);
             }
         });
     });
+
+    // Handle redirect from 404.html — if someone visits /about directly
+    const redirectUrl = sessionStorage.getItem('__redirect');
+    if (redirectUrl) {
+        sessionStorage.removeItem('__redirect');
+        const redirectPath = new URL(redirectUrl).pathname.replace(/^\//, '').replace(/\/$/, '');
+        if (redirectPath) {
+            const target = document.getElementById(redirectPath);
+            if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+            history.replaceState(null, '', '/' + redirectPath);
+        }
+    }
 
     // Initialize crazy effects
     createGlitchParticles();
