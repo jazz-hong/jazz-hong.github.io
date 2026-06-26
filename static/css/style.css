@@ -2993,3 +2993,16 @@ body::before {
         font-size: 2.1rem;
     }
 }
+
+@media (max-width: 768px) {
+    .page-about .content-wrapper,
+    .page-about .section,
+    .page-about .section-grid,
+    .page-about .about-content,
+    .page-about .about-text {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        -webkit-overflow-scrolling: auto;
+    }
+}
