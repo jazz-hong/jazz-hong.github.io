@@ -3629,6 +3629,12 @@ body::before {
 }
 
 @media (max-width: 768px) {
+    .page-home main {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
     .page-about .content-wrapper,
     .page-about .section,
     .page-about .section-grid,
