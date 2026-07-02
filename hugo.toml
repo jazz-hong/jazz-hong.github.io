@@ -9,3 +9,6 @@ disableKinds = ['taxonomy', 'term', 'RSS']
 
 [markup.goldmark.renderer]
   unsafe = true
+
+[security]
+  allowContent = ['^text/html$']
